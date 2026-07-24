@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SewaKita - Layanan Rental & Persewaan Serbaguna</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --accent: #10b981;
+            --bg-body: #f8fafc;
+            --surface: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* HEADER & NAVBAR */
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .nav-container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span { color: var(--text-dark); }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--primary); }
+
+        .btn-nav {
+            background: var(--primary);
+            color: white !important;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-nav:hover { background: var(--primary-hover); }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+            padding: 4rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .badge-hero {
+            display: inline-block;
+            background: #dbeafe;
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* KATALOG SECTION */
+        .section-container {
+            max-width: 1140px;
+            margin: 4rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .catalog-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .catalog-card:hover { transform: translateY(-4px); }
+
+        .card-img-placeholder {
+            height: 180px;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 3rem;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .card-price span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .btn-card {
+            margin-top: auto;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-card:hover { background: var(--primary-hover); }
+
+        /* FORM SECTION */
+        .form-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .form-box {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background: #f8fafc;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* PRICE CALCULATOR BOX */
+        .calc-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .calc-title {
+            font-size: 0.85rem;
+            color: #166534;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .calc-amount {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #15803d;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-submit:hover { background: var(--primary-hover); }
+
+        .btn-submit:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        /* NOTIFICATION BOX */
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .alert-success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+        /* FOOTER */
+        footer {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .form-layout { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">⚡ Sewa<span>Kita</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#katalog">Katalog Unit</a></li>
+                    <li><a href="#pemesanan">Form Rental</a></li>
+                    <li><a href="#kontak">Hubungi Kami</a></li>
+                    <li><a href="#pemesanan" class="btn-nav">Sewa Sekarang</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-wrapper">
+            <span class="badge-hero">PROMO & LAYANAN TERPERCAYA</span>
+            <h1>Sewa Apapun Lebih Mudah, Cepat, dan Terjangkau</h1>
+            <p>Pilih unit favorit Anda mulai dari kendaraan, unit kebutuhan anak, hingga peralatan hobi dengan proses pemesanan praktis secara digital.</p>
+        </div>
+    </section>
+
+    <!-- KATALOG UNIT -->
+    <section id="katalog" class="section-container">
+        <div class="section-header">
+            <h2>Pilihan Unit persewaan</h2>
+            <p>Pilih unit yang ingin Anda sewa dan klik "Sewa Sekarang"</p>
+        </div>
+
+        <div class="category-filter" id="filterContainer">
+            <!-- Filter tombol dirender via JS -->
+        </div>
+
+        <div class="catalog-grid" id="catalogGrid">
+            <!-- Item katalog dirender via JS -->
+        </div>
+    </section>
+
+    <!-- FORM PEMESANAN & KALKULATOR -->
+    <section id="pemesanan" class="section-container">
+        <div class="section-header">
+            <h2>Formulir Pemesanan Rental</h2>
+            <p>Isi data Anda dan tentukan durasi sewa yang diinginkan</p>
+        </div>
+
+        <div class="form-layout">
+            <!-- Form Utama -->
+            <div class="form-box">
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label>Nama Lengkap *</label>
+                        <input type="text" id="nama" required placeholder="Contoh: Budi Santoso">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>No. WhatsApp *</label>
+                            <input type="tel" id="whatsapp" required placeholder="08123456789">
+                        </div>
+                        <div class="form-group">
+                            <label>Email (Opsional)</label>
+                            <input type="email" id="email" placeholder="budi@email.com">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Kategori *</label>
+                            <select id="kategori" required onchange="updateItemDropdown()">
+                                <option value="">-- Pilih Kategori --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Pilih Unit/Barang *</label>
+                            <select id="item" required onchange="calculateTotal()">
+                                <option value="">-- Pilih Unit --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tanggal Mulai Sewa *</label>
+                            <input type="date" id="tanggalSewa" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Durasi Sewa (Hari) *</label>
+                            <input type="number" id="durasi" value="1" min="1" required onchange="calculateTotal()" onkeyup="calculateTotal()">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Opsi Pengambilan/Pengiriman *</label>
+                        <select id="pengiriman" required>
+                            <option value="Ambil Mandiri">Ambil Mandiri di Toko/Lokasi</option>
+                            <option value="Layanan Antar-Jemput">Layanan Antar-Jemput ke Alamat</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Catatan Tambahan / Alamat Pengiriman</label>
+                        <textarea id="catatan" rows="3" placeholder="Tuliskan catatan khusus atau alamat lengkap jika menggunakan pengiriman..."></textarea>
+                    </div>
+
+                    <!-- Ringkasan Harga -->
+                    <div class="calc-box">
+                        <div class="calc-title">Estimasi Total Biaya</div>
+                        <div class="calc-amount" id="displayTotal">Rp 0</div>
+                    </div>
+
+                    <button type="submit" id="btnSubmitOrder" class="btn-submit">Kirim Pemesanan Sekarang</button>
+                    <div id="alertOrder" class="alert"></div>
+                </form>
+            </div>
+
+            <!-- Form Kontak & Pertanyaan -->
+            <div id="kontak" class="form-box">
+                <h3 style="margin-bottom: 1rem;">Ada Pertanyaan?</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                    Hubungi tim kami jika Anda membutuhkan konsultasi unit khusus atau penawaran rental durasi panjang.
+                </p>
+
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>Nama Anda *</label>
+                        <input type="text" id="contactNama" required placeholder="Nama Anda">
+                    </div>
+                    <div class="form-group">
+                        <label>No. WA / Email *</label>
+                        <input type="text" id="contactInfo" required placeholder="08xxx / email@domain.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Subjek Pertanyaan</label>
+                        <input type="text" id="contactSubjek" placeholder="Contoh: Sewa Bulanan">
+                    </div>
+                    <div class="form-group">
+                        <label>Pesan Anda *</label>
+                        <textarea id="contactPesan" rows="4" required placeholder="Tuliskan pertanyaan Anda..."></textarea>
+                    </div>
+
+                    <button type="submit" id="btnSubmitContact" class="btn-submit" style="background: #334155;">Kirim Pesan</button>
+                    <div id="alertContact" class="alert"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 SewaKita Digital Systems. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // =========================================================================
+        // 1. KONFIGURASI SISTEM & KATALOG (BISA ANDA UBAH SESUAI USAHA RENTAL)
+        // =========================================================================
+        const APPS_SCRIPT_URL = "MASUKKAN_URL_WEB_APP_GOOGLE_APPS_SCRIPT_DI_SINI";
+
+        // Database Unit Rental (Bisa Kategori Mobil, Motor, Mainan, Buku, Kamera, dll)
+        const RENTAL_CATALOG = [
+            { id: "MTR-01", category: "Kendaraan", title: "Motor Matic Honda Vario 160", price: 100000, icon: "🛵" },
+            { id: "MTR-02", category: "Kendaraan", title: "Motor Yamaha NMAX 155", price: 120000, icon: "🛵" },
+            { id: "MBL-01", category: "Kendaraan", title: "Mobil Toyota Avanza (Tanpa Supir)", price: 350000, icon: "🚗" },
+            { id: "TOY-01", category: "Mainan & Anak", title: "Mobil Aki Elektrik Anak", price: 75000, icon: "🏎️" },
+            { id: "TOY-02", category: "Mainan & Anak", title: "Stroller Bayi Premium", price: 50000, icon: "👶" },
+            { id: "BK-01",  category: "Buku & Komik", title: "Paket Serial Novel Harry Potter (1 Set)", price: 30000, icon: "📚" },
+            { id: "CAM-01", category: "Elektronik", title: "Kamera Mirrorless Sony Alpha a6400", price: 200000, icon: "📷" }
+        ];
+
+        // =========================================================================
+        // 2. INISIALISASI KATALOG & DROPDOWN
+        // =========================================================================
+        document.addEventListener("DOMContentLoaded", () => {
+            initCatalog();
+            initCategoryDropdown();
+            
+            // Set default minimal tanggal sewa ke hari ini
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('tanggalSewa').min = today;
+            document.getElementById('tanggalSewa').value = today;
+        });
+
+        function initCatalog() {
+            const grid = document.getElementById("catalogGrid");
+            const filterContainer = document.getElementById("filterContainer");
+
+            // Ambil semua kategori unik
+            const categories = ["Semua", ...new Set(RENTAL_CATALOG.map(item => item.category))];
+
+            // Render Tombol Filter
+            filterContainer.innerHTML = categories.map((cat, idx) => `
+                <button class="filter-btn ${idx === 0 ? 'active' : ''}" onclick="filterCatalog('${cat}', this)">${cat}</button>
+            `).join('');
+
+            // Render Kartu Katalog
+            renderCards(RENTAL_CATALOG);
+        }
+
+        function renderCards(items) {
+            const grid = document.getElementById("catalogGrid");
+            grid.innerHTML = items.map(item => `
+                <div class="catalog-card">
+                    <div class="card-img-placeholder">${item.icon}</div>
+                    <div class="card-body">
+                        <div class="card-tag">${item.category}</div>
+                        <div class="card-title">${item.title}</div>
+                        <div class="card-price">Rp ${item.price.toLocaleString('id-ID')} <span>/ hari</span></div>
+                        <button class="btn-card" onclick="selectItemToOrder('${item.category}', '${item.id}')">Sewa Sekarang</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterCatalog(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if (category === "Semua") {
+                renderCards(RENTAL_CATALOG);
+            } else {
+                const filtered = RENTAL_CATALOG.filter(item => item.category === category);
+                renderCards(filtered);
+            }
+        }
+
+        function initCategoryDropdown() {
+            const kategoriSelect = document.getElementById("kategori");
+            const categories = [...new Set(RENTAL_CATALOG.map(item => item.category))];
+            
+            categories.forEach(cat => {
+                const option = document.createElement("option");
+                option.value = cat;
+                option.textContent = cat;
+                kategoriSelect.appendChild(option);
+            });
+        }
+
+        function updateItemDropdown() {
+            const selectedCat = document.getElementById("kategori").value;
+            const itemSelect = document.getElementById("item");
+            itemSelect.innerHTML = '<option value="">-- Pilih Unit --</option>';
+
+            const filteredItems = RENTAL_CATALOG.filter(item => item.category === selectedCat);
+            filteredItems.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item.id;
+                option.textContent = `${item.title} (Rp ${item.price.toLocaleString('id-ID')}/hari)`;
+                itemSelect.appendChild(option);
+            });
+
+            calculateTotal();
+        }
+
+        // Auto-select unit ketika tombol "Sewa Sekarang" di katalog diklik
+        function selectItemToOrder(category, itemId) {
+            document.getElementById("kategori").value = category;
+            updateItemDropdown();
+            document.getElementById("item").value = itemId;
+            calculateTotal();
+
+            // Scroll ke form pemesanan
+            document.getElementById("pemesanan").scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // =========================================================================
+        // 3. KALKULATOR TOTAL HARI & HARGA
+        // =========================================================================
+        function calculateTotal() {
+            const itemId = document.getElementById("item").value;
+            const durasi = parseInt(document.getElementById("durasi").value) || 0;
+            const displayTotal = document.getElementById("displayTotal");
+
+            const selectedUnit = RENTAL_CATALOG.find(i => i.id === itemId);
+
+            if (selectedUnit && durasi > 0) {
+                const total = selectedUnit.price * durasi;
+                displayTotal.innerText = "Rp " + total.toLocaleString('id-ID');
+                displayTotal.dataset.rawTotal = total; // Simpan nilai murni angka
+            } else {
+                displayTotal.innerText = "Rp 0";
+                displayTotal.dataset.rawTotal = 0;
+            }
+        }
+
+        // =========================================================================
+        // 4. METODE FETCH() KE GOOGLE APPS SCRIPT
+        // =========================================================================
+        
+        // Form Pemesanan
+        document.getElementById("orderForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const itemId = document.getElementById("item").value;
+            const selectedUnit = RENTAL_CATALOG.find(i => i.id === itemId);
+
+            const payload = {
+                formType: "pemesanan",
+                nama: document.getElementById("nama").value,
+                whatsapp: document.getElementById("whatsapp").value,
+                email: document.getElementById("email").value,
+                kategori: document.getElementById("kategori").value,
+                item: selectedUnit ? selectedUnit.title : "-",
+                tanggalSewa: document.getElementById("tanggalSewa").value,
+                durasi: document.getElementById("durasi").value,
+                totalHarga: document.getElementById("displayTotal").dataset.rawTotal || 0,
+                pengiriman: document.getElementById("pengiriman").value,
+                catatan: document.getElementById("catatan").value
+            };
+
+            await sendDataToScript(
+                payload, 
+                "btnSubmitOrder", 
+                "alertOrder", 
+                "Terima kasih! Pemesanan Anda telah terdaftar. Tim kami akan segera menghubungi via WhatsApp."
+            );
+            
+            this.reset();
+            calculateTotal();
+        });
+
+        // Form Kontak
+        document.getElementById("contactForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const payload = {
+                formType: "kontak",
+                nama: document.getElementById("contactNama").value,
+                kontak: document.getElementById("contactInfo").value,
+                subjek: document.getElementById("contactSubjek").value,
+                pesan: document.getElementById("contactPesan").value
+            };
+
+            await sendDataToScript(
+                payload, 
+                "btnSubmitContact", 
+                "alertContact", 
+                "Pesan Anda telah berhasil dikirim. Kami akan membalas secepatnya!"
+            );
+
+            this.reset();
+        });
+
+        // Fungsi Generik untuk Pengiriman Data Menggunakan fetch()
+        async function sendDataToScript(payload, btnId, alertId, successMessage) {
+            const btn = document.getElementById(btnId);
+            const alertBox = document.getElementById(alertId);
+            const originalBtnText = btn.innerText;
+
+            btn.disabled = true;
+            btn.innerText = "Memproses & Mengirim...";
+            alertBox.style.display = "none";
+
+            try {
+                // Trik penting: Content-Type 'text/plain;charset=utf-8' digunakan 
+                // untuk menghindari CORS preflight error dari browser ke Google Apps Script
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    alertBox.className = "alert alert-success";
+                    alertBox.innerText = successMessage;
+                } else {
+                    throw new Error(result.message || "Gagal menyimpan data.");
+                }
+
+            } catch (error) {
+                console.error("Fetch Error:", error);
+                alertBox.className = "alert alert-error";
+                alertBox.innerText = "Terjadi kesalahan saat mengunggah data. Pastikan URL Apps Script sudah sesuai.";
+            } finally {
+                btn.disabled = false;
+                btn.innerText = originalBtnText;
+                alertBox.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
