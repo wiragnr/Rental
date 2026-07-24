@@ -1,766 +1,856 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SewaKita - Layanan Rental & Persewaan Serbaguna</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="Sewa motor dan mobil harian, mingguan, hingga bulanan dengan harga terbaik, armada terbaru, dan pelayanan 24 jam.">
+    <meta name="keywords" content="rental motor, rental mobil, sewa kendaraan, rental mobil murah, sewa motor harian">
+    <meta name="author" content="ProRental Indonesia">
     
-    <style>
-        :root {
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --accent: #10b981;
-            --bg-body: #f8fafc;
-            --surface: #ffffff;
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --radius: 12px;
-            --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-        }
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://username.github.io/rental-kendaraan/">
+    <meta property="og:title" content="ProRental - Rental Motor & Mobil Terpercaya">
+    <meta property="og:description" content="Layanan sewa motor dan mobil premium dengan proses booking instan via WhatsApp.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=1200">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
-        }
+    <title>ProRental - Sewa Motor & Mobil Terpercaya</title>
 
-        body {
-            background-color: var(--bg-body);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
+    <!-- Google Fonts (Poppins) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-        /* HEADER & NAVBAR */
-        header {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-        }
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-        .nav-container {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    <!-- AOS (Animate On Scroll) CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo span { color: var(--text-dark); }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: color 0.2s;
-        }
-
-        nav a:hover { color: var(--primary); }
-
-        .btn-nav {
-            background: var(--primary);
-            color: white !important;
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            transition: background 0.2s;
-        }
-
-        .btn-nav:hover { background: var(--primary-hover); }
-
-        /* HERO SECTION */
-        .hero {
-            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
-            padding: 4rem 1.5rem;
-            text-align: center;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .hero-wrapper {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .badge-hero {
-            display: inline-block;
-            background: #dbeafe;
-            color: var(--primary);
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero h1 {
-            font-size: 2.75rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-            margin-bottom: 1.2rem;
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        /* KATALOG SECTION */
-        .section-container {
-            max-width: 1140px;
-            margin: 4rem auto;
-            padding: 0 1.5rem;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .section-header h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .category-filter {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 0.5rem 1.2rem;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .catalog-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .catalog-card:hover { transform: translateY(-4px); }
-
-        .card-img-placeholder {
-            height: 180px;
-            background: #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            font-size: 3rem;
-        }
-
-        .card-body {
-            padding: 1.25rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .card-tag {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.4rem;
-        }
-
-        .card-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-price {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        .card-price span {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        .btn-card {
-            margin-top: auto;
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.75rem;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-card:hover { background: var(--primary-hover); }
-
-        /* FORM SECTION */
-        .form-layout {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 2rem;
-            align-items: start;
-        }
-
-        .form-box {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .form-group input, 
-        .form-group select, 
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            background: #f8fafc;
-        }
-
-        .form-group input:focus, 
-        .form-group select:focus, 
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: white;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        /* PRICE CALCULATOR BOX */
-        .calc-box {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            padding: 1.2rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-        }
-
-        .calc-title {
-            font-size: 0.85rem;
-            color: #166534;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .calc-amount {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #15803d;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.9rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn-submit:hover { background: var(--primary-hover); }
-
-        .btn-submit:disabled {
-            background: #94a3b8;
-            cursor: not-allowed;
-        }
-
-        /* NOTIFICATION BOX */
-        .alert {
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            display: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-
-        .alert-success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
-        .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
-
-        /* FOOTER */
-        footer {
-            background: #0f172a;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .form-layout { grid-template-columns: 1fr; }
-            .form-row { grid-template-columns: 1fr; }
-            nav ul { display: none; }
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <header>
-        <div class="nav-container">
-            <a href="#" class="logo">⚡ Sewa<span>Kita</span></a>
-            <nav>
-                <ul>
-                    <li><a href="#katalog">Katalog Unit</a></li>
-                    <li><a href="#pemesanan">Form Rental</a></li>
-                    <li><a href="#kontak">Hubungi Kami</a></li>
-                    <li><a href="#pemesanan" class="btn-nav">Sewa Sekarang</a></li>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Sticky Navbar -->
+    <header class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="brand-logo">
+                <i class="bi bi-speedometer2"></i>
+                <span>Pro<strong>Rental</strong></span>
+            </a>
+
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#keunggulan" class="nav-link">Keunggulan</a></li>
+                    <li><a href="#armada" class="nav-link">Armada</a></li>
+                    <li><a href="#cara-booking" class="nav-link">Cara Booking</a></li>
+                    <li><a href="#promo" class="nav-link">Promo</a></li>
+                    <li><a href="#testimoni" class="nav-link">Testimoni</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                    <li><a href="#lokasi" class="nav-link">Kontak</a></li>
                 </ul>
             </nav>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
+                    <i class="bi bi-moon-stars" id="theme-icon"></i>
+                </button>
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20booking%20kendaraan" target="_blank" rel="noopener" class="btn btn-primary btn-nav">
+                    <i class="bi bi-whatsapp"></i> Booking Sekarang
+                </a>
+                <button class="hamburger" id="hamburger" aria-label="Toggle Navigation">
+                    <i class="bi bi-list"></i>
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="hero-wrapper">
-            <span class="badge-hero">PROMO & LAYANAN TERPERCAYA</span>
-            <h1>Sewa Apapun Lebih Mudah, Cepat, dan Terjangkau</h1>
-            <p>Pilih unit favorit Anda mulai dari kendaraan, unit kebutuhan anak, hingga peralatan hobi dengan proses pemesanan praktis secara digital.</p>
-        </div>
-    </section>
-
-    <!-- KATALOG UNIT -->
-    <section id="katalog" class="section-container">
-        <div class="section-header">
-            <h2>Pilihan Unit persewaan</h2>
-            <p>Pilih unit yang ingin Anda sewa dan klik "Sewa Sekarang"</p>
-        </div>
-
-        <div class="category-filter" id="filterContainer">
-            <!-- Filter tombol dirender via JS -->
-        </div>
-
-        <div class="catalog-grid" id="catalogGrid">
-            <!-- Item katalog dirender via JS -->
-        </div>
-    </section>
-
-    <!-- FORM PEMESANAN & KALKULATOR -->
-    <section id="pemesanan" class="section-container">
-        <div class="section-header">
-            <h2>Formulir Pemesanan Rental</h2>
-            <p>Isi data Anda dan tentukan durasi sewa yang diinginkan</p>
-        </div>
-
-        <div class="form-layout">
-            <!-- Form Utama -->
-            <div class="form-box">
-                <form id="orderForm">
-                    <div class="form-group">
-                        <label>Nama Lengkap *</label>
-                        <input type="text" id="nama" required placeholder="Contoh: Budi Santoso">
+    <main>
+        <!-- 2. Hero Section -->
+        <section class="hero" id="home">
+            <div class="container hero-grid">
+                <div class="hero-content" data-aos="fade-right">
+                    <span class="badge badge-accent"><i class="bi bi-star-fill"></i> Layanan Rental No. 1</span>
+                    <h1 class="hero-title">Rental Motor & Mobil Terpercaya</h1>
+                    <p class="hero-subtitle">
+                        Sewa kendaraan harian, mingguan, hingga bulanan dengan harga terbaik, armada terbaru, dan proses booking yang sangat mudah.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20tanya%20sewa%20kendaraan" target="_blank" rel="noopener" class="btn btn-accent btn-lg">
+                            <i class="bi bi-whatsapp"></i> Booking via WhatsApp
+                        </a>
+                        <a href="#armada" class="btn btn-outline btn-lg">
+                            Lihat Armada <i class="bi bi-arrow-down"></i>
+                        </a>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>No. WhatsApp *</label>
-                            <input type="tel" id="whatsapp" required placeholder="08123456789">
+                    
+                    <!-- Stats Counter -->
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <h3 class="counter" data-target="5000">0</h3>
+                            <span class="stat-label">Pelanggan Puas</span>
                         </div>
-                        <div class="form-group">
-                            <label>Email (Opsional)</label>
-                            <input type="email" id="email" placeholder="budi@email.com">
+                        <div class="stat-item">
+                            <h3 class="counter" data-target="100">0</h3>
+                            <span class="stat-label">Unit Armada</span>
                         </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Kategori *</label>
-                            <select id="kategori" required onchange="updateItemDropdown()">
-                                <option value="">-- Pilih Kategori --</option>
-                            </select>
+                        <div class="stat-item">
+                            <h3>24/7</h3>
+                            <span class="stat-label">Layanan Support</span>
                         </div>
-                        <div class="form-group">
-                            <label>Pilih Unit/Barang *</label>
-                            <select id="item" required onchange="calculateTotal()">
-                                <option value="">-- Pilih Unit --</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Tanggal Mulai Sewa *</label>
-                            <input type="date" id="tanggalSewa" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Durasi Sewa (Hari) *</label>
-                            <input type="number" id="durasi" value="1" min="1" required onchange="calculateTotal()" onkeyup="calculateTotal()">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Opsi Pengambilan/Pengiriman *</label>
-                        <select id="pengiriman" required>
-                            <option value="Ambil Mandiri">Ambil Mandiri di Toko/Lokasi</option>
-                            <option value="Layanan Antar-Jemput">Layanan Antar-Jemput ke Alamat</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Catatan Tambahan / Alamat Pengiriman</label>
-                        <textarea id="catatan" rows="3" placeholder="Tuliskan catatan khusus atau alamat lengkap jika menggunakan pengiriman..."></textarea>
-                    </div>
-
-                    <!-- Ringkasan Harga -->
-                    <div class="calc-box">
-                        <div class="calc-title">Estimasi Total Biaya</div>
-                        <div class="calc-amount" id="displayTotal">Rp 0</div>
-                    </div>
-
-                    <button type="submit" id="btnSubmitOrder" class="btn-submit">Kirim Pemesanan Sekarang</button>
-                    <div id="alertOrder" class="alert"></div>
-                </form>
-            </div>
-
-            <!-- Form Kontak & Pertanyaan -->
-            <div id="kontak" class="form-box">
-                <h3 style="margin-bottom: 1rem;">Ada Pertanyaan?</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
-                    Hubungi tim kami jika Anda membutuhkan konsultasi unit khusus atau penawaran rental durasi panjang.
-                </p>
-
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label>Nama Anda *</label>
-                        <input type="text" id="contactNama" required placeholder="Nama Anda">
-                    </div>
-                    <div class="form-group">
-                        <label>No. WA / Email *</label>
-                        <input type="text" id="contactInfo" required placeholder="08xxx / email@domain.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Subjek Pertanyaan</label>
-                        <input type="text" id="contactSubjek" placeholder="Contoh: Sewa Bulanan">
-                    </div>
-                    <div class="form-group">
-                        <label>Pesan Anda *</label>
-                        <textarea id="contactPesan" rows="4" required placeholder="Tuliskan pertanyaan Anda..."></textarea>
-                    </div>
-
-                    <button type="submit" id="btnSubmitContact" class="btn-submit" style="background: #334155;">Kirim Pesan</button>
-                    <div id="alertContact" class="alert"></div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 SewaKita Digital Systems. All Rights Reserved.</p>
-    </footer>
-
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // =========================================================================
-        // 1. KONFIGURASI SISTEM & KATALOG (BISA ANDA UBAH SESUAI USAHA RENTAL)
-        // =========================================================================
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyJ-STilpc6VAxnBUyQefId8cBdraD3XDFZRDDXwHpmEYNbQssBJ6SKm35oldOl6XwH/exec";
-
-        // Database Unit Rental (Bisa Kategori Mobil, Motor, Mainan, Buku, Kamera, dll)
-        const RENTAL_CATALOG = [
-            { id: "MTR-01", category: "Kendaraan", title: "Motor Matic Honda Vario 160", price: 100000, icon: "🛵" },
-            { id: "MTR-02", category: "Kendaraan", title: "Motor Yamaha NMAX 155", price: 120000, icon: "🛵" },
-            { id: "MBL-01", category: "Kendaraan", title: "Mobil Toyota Avanza (Tanpa Supir)", price: 350000, icon: "🚗" },
-            { id: "TOY-01", category: "Mainan & Anak", title: "Mobil Aki Elektrik Anak", price: 75000, icon: "🏎️" },
-            { id: "TOY-02", category: "Mainan & Anak", title: "Stroller Bayi Premium", price: 50000, icon: "👶" },
-            { id: "BK-01",  category: "Buku & Komik", title: "Paket Serial Novel Harry Potter (1 Set)", price: 30000, icon: "📚" },
-            { id: "CAM-01", category: "Elektronik", title: "Kamera Mirrorless Sony Alpha a6400", price: 200000, icon: "📷" }
-        ];
-
-        // =========================================================================
-        // 2. INISIALISASI KATALOG & DROPDOWN
-        // =========================================================================
-        document.addEventListener("DOMContentLoaded", () => {
-            initCatalog();
-            initCategoryDropdown();
-            
-            // Set default minimal tanggal sewa ke hari ini
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('tanggalSewa').min = today;
-            document.getElementById('tanggalSewa').value = today;
-        });
-
-        function initCatalog() {
-            const grid = document.getElementById("catalogGrid");
-            const filterContainer = document.getElementById("filterContainer");
-
-            // Ambil semua kategori unik
-            const categories = ["Semua", ...new Set(RENTAL_CATALOG.map(item => item.category))];
-
-            // Render Tombol Filter
-            filterContainer.innerHTML = categories.map((cat, idx) => `
-                <button class="filter-btn ${idx === 0 ? 'active' : ''}" onclick="filterCatalog('${cat}', this)">${cat}</button>
-            `).join('');
-
-            // Render Kartu Katalog
-            renderCards(RENTAL_CATALOG);
-        }
-
-        function renderCards(items) {
-            const grid = document.getElementById("catalogGrid");
-            grid.innerHTML = items.map(item => `
-                <div class="catalog-card">
-                    <div class="card-img-placeholder">${item.icon}</div>
-                    <div class="card-body">
-                        <div class="card-tag">${item.category}</div>
-                        <div class="card-title">${item.title}</div>
-                        <div class="card-price">Rp ${item.price.toLocaleString('id-ID')} <span>/ hari</span></div>
-                        <button class="btn-card" onclick="selectItemToOrder('${item.category}', '${item.id}')">Sewa Sekarang</button>
                     </div>
                 </div>
-            `).join('');
-        }
 
-        function filterCatalog(category, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+                <div class="hero-visual" data-aos="fade-left">
+                    <div class="hero-image-card glassmorphism">
+                        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=800" alt="Rental Mobil Premium" class="hero-img" loading="lazy">
+                        <div class="hero-floating-badge glassmorphism">
+                            <i class="bi bi-shield-check text-success"></i>
+                            <div>
+                                <strong>Unit Asuransi Full</strong>
+                                <small>Aman & Nyaman</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            if (category === "Semua") {
-                renderCards(RENTAL_CATALOG);
-            } else {
-                const filtered = RENTAL_CATALOG.filter(item => item.category === category);
-                renderCards(filtered);
-            }
-        }
+        <!-- 3. Kenapa Memilih Kami -->
+        <section class="section bg-light" id="keunggulan">
+            <div class="container">
+                <div class="section-header text-center" data-aos="fade-up">
+                    <span class="section-subtitle">Keunggulan Kami</span>
+                    <h2 class="section-title">Kenapa Memilih ProRental?</h2>
+                    <p class="section-description">Kami mengutamakan keselamatan, kebersihan, dan kenyamanan perjalanan Anda.</p>
+                </div>
 
-        function initCategoryDropdown() {
-            const kategoriSelect = document.getElementById("kategori");
-            const categories = [...new Set(RENTAL_CATALOG.map(item => item.category))];
-            
-            categories.forEach(cat => {
-                const option = document.createElement("option");
-                option.value = cat;
-                option.textContent = cat;
-                kategoriSelect.appendChild(option);
-            });
-        }
+                <div class="grid grid-3">
+                    <div class="feature-card glassmorphism" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon"><i class="bi bi-tags"></i></div>
+                        <h3>Harga Transparan</h3>
+                        <p>Tanpa biaya tersembunyi. Semua tarif sewa sudah nett dan termasuk fasilitas standar.</p>
+                    </div>
 
-        function updateItemDropdown() {
-            const selectedCat = document.getElementById("kategori").value;
-            const itemSelect = document.getElementById("item");
-            itemSelect.innerHTML = '<option value="">-- Pilih Unit --</option>';
+                    <div class="feature-card glassmorphism" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon"><i class="bi bi-tools"></i></div>
+                        <h3>Armada Terawat</h3>
+                        <p>Servis rutin berkala di bengkel resmi untuk memastikan performa kendaraan selalu prima.</p>
+                    </div>
 
-            const filteredItems = RENTAL_CATALOG.filter(item => item.category === selectedCat);
-            filteredItems.forEach(item => {
-                const option = document.createElement("option");
-                option.value = item.id;
-                option.textContent = `${item.title} (Rp ${item.price.toLocaleString('id-ID')}/hari)`;
-                itemSelect.appendChild(option);
-            });
+                    <div class="feature-card glassmorphism" data-aos="fade-up" data-aos-delay="300">
+                        <div class="feature-icon"><i class="bi bi-stars"></i></div>
+                        <h3>Unit Bersih & Steril</h3>
+                        <p>Setiap unit selalu dicuci dan didisinfeksi sebelum diserahkan ke pelanggan.</p>
+                    </div>
 
-            calculateTotal();
-        }
+                    <div class="feature-card glassmorphism" data-aos="fade-up" data-aos-delay="400">
+                        <div class="feature-icon"><i class="bi bi-truck"></i></div>
+                        <h3>Antar Jemput Gratis</h3>
+                        <p>Layanan antar jemput unit gratis untuk area bandara, stasiun, dan pusat kota.</p>
+                    </div>
 
-        // Auto-select unit ketika tombol "Sewa Sekarang" di katalog diklik
-        function selectItemToOrder(category, itemId) {
-            document.getElementById("kategori").value = category;
-            updateItemDropdown();
-            document.getElementById("item").value = itemId;
-            calculateTotal();
+                    <div class="feature-card glassmorphism" data-aos="fade-up" data-aos-delay="500">
+                        <div class="feature-icon"><i class="bi bi-headset"></i></div>
+                        <h3>Support 24 Jam</h3>
+                        <p>Tim customer service kami siap membantu kendala perjalanan Anda kapan saja.</p>
+                    </div>
 
-            // Scroll ke form pemesanan
-            document.getElementById("pemesanan").scrollIntoView({ behavior: 'smooth' });
-        }
+                    <div class="feature-card glassmorphism" data-aos="fade-up" data-aos-delay="600">
+                        <div class="feature-icon"><i class="bi bi-phone"></i></div>
+                        <h3>Booking Mudah</h3>
+                        <p>Proses pemesanan serba digital via WhatsApp dalam hitungan menit tanpa ribet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        // =========================================================================
-        // 3. KALKULATOR TOTAL HARI & HARGA
-        // =========================================================================
-        function calculateTotal() {
-            const itemId = document.getElementById("item").value;
-            const durasi = parseInt(document.getElementById("durasi").value) || 0;
-            const displayTotal = document.getElementById("displayTotal");
+        <!-- 4 & 5. Armada Motor & Mobil -->
+        <section class="section" id="armada">
+            <div class="container">
+                <div class="section-header text-center" data-aos="fade-up">
+                    <span class="section-subtitle">Pilihan Unit</span>
+                    <h2 class="section-title">Armada Motor & Mobil Terbaru</h2>
+                    <p class="section-description">Pilih kendaraan sesuai dengan kebutuhan perjalanan Anda.</p>
+                </div>
 
-            const selectedUnit = RENTAL_CATALOG.find(i => i.id === itemId);
+                <!-- Tabs Filter -->
+                <div class="armada-tabs" data-aos="fade-up">
+                    <button class="tab-btn active" data-tab="motor">Sepeda Motor</button>
+                    <button class="tab-btn" data-tab="mobil">Mobil</button>
+                </div>
 
-            if (selectedUnit && durasi > 0) {
-                const total = selectedUnit.price * durasi;
-                displayTotal.innerText = "Rp " + total.toLocaleString('id-ID');
-                displayTotal.dataset.rawTotal = total; // Simpan nilai murni angka
-            } else {
-                displayTotal.innerText = "Rp 0";
-                displayTotal.dataset.rawTotal = 0;
-            }
-        }
+                <!-- Content Motor -->
+                <div class="tab-content active" id="tab-motor">
+                    <div class="grid grid-3">
+                        <!-- Motor Card 1 -->
+                        <div class="card product-card" data-aos="fade-up">
+                            <div class="card-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600" alt="Honda Scoopy" loading="lazy">
+                                <span class="badge badge-accent">Populer</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Honda Scoopy</h3>
+                                <ul class="specs-list">
+                                    <li><i class="bi bi-calendar-event"></i> 2023</li>
+                                    <li><i class="bi bi-gear"></i> Matic</li>
+                                    <li><i class="bi bi-fuel-pump"></i> Injeksi</li>
+                                </ul>
+                                <div class="card-price">
+                                    <span class="price">Rp90.000</span>
+                                    <small>/ Hari</small>
+                                </div>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20sewa%20Honda%20Scoopy" class="btn btn-primary btn-block" target="_blank" rel="noopener">
+                                    Booking Sekarang
+                                </a>
+                            </div>
+                        </div>
 
-        // =========================================================================
-        // 4. METODE FETCH() KE GOOGLE APPS SCRIPT
-        // =========================================================================
-        
-        // Form Pemesanan
-        document.getElementById("orderForm").addEventListener("submit", async function(e) {
-            e.preventDefault();
+                        <!-- Motor Card 2 -->
+                        <div class="card product-card" data-aos="fade-up" data-aos-delay="100">
+                            <div class="card-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=600" alt="Honda Vario 160" loading="lazy">
+                            </div>
+                            <div class="card-body">
+                                <h3>Honda Vario 160</h3>
+                                <ul class="specs-list">
+                                    <li><i class="bi bi-calendar-event"></i> 2023</li>
+                                    <li><i class="bi bi-gear"></i> Matic</li>
+                                    <li><i class="bi bi-fuel-pump"></i> Injeksi</li>
+                                </ul>
+                                <div class="card-price">
+                                    <span class="price">Rp120.000</span>
+                                    <small>/ Hari</small>
+                                </div>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20sewa%20Honda%20Vario%20160" class="btn btn-primary btn-block" target="_blank" rel="noopener">
+                                    Booking Sekarang
+                                </a>
+                            </div>
+                        </div>
 
-            const itemId = document.getElementById("item").value;
-            const selectedUnit = RENTAL_CATALOG.find(i => i.id === itemId);
+                        <!-- Motor Card 3 -->
+                        <div class="card product-card" data-aos="fade-up" data-aos-delay="200">
+                            <div class="card-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&q=80&w=600" alt="Yamaha NMAX" loading="lazy">
+                                <span class="badge badge-secondary">Comfort</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Yamaha NMAX</h3>
+                                <ul class="specs-list">
+                                    <li><i class="bi bi-calendar-event"></i> 2024</li>
+                                    <li><i class="bi bi-gear"></i> Matic</li>
+                                    <li><i class="bi bi-fuel-pump"></i> Injeksi</li>
+                                </ul>
+                                <div class="card-price">
+                                    <span class="price">Rp180.000</span>
+                                    <small>/ Hari</small>
+                                </div>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20sewa%20Yamaha%20NMAX" class="btn btn-primary btn-block" target="_blank" rel="noopener">
+                                    Booking Sekarang
+                                </a>
+                            </div>
+                        </div>
 
-            const payload = {
-                formType: "pemesanan",
-                nama: document.getElementById("nama").value,
-                whatsapp: document.getElementById("whatsapp").value,
-                email: document.getElementById("email").value,
-                kategori: document.getElementById("kategori").value,
-                item: selectedUnit ? selectedUnit.title : "-",
-                tanggalSewa: document.getElementById("tanggalSewa").value,
-                durasi: document.getElementById("durasi").value,
-                totalHarga: document.getElementById("displayTotal").dataset.rawTotal || 0,
-                pengiriman: document.getElementById("pengiriman").value,
-                catatan: document.getElementById("catatan").value
-            };
+                        <!-- Motor Card 4 -->
+                        <div class="card product-card" data-aos="fade-up">
+                            <div class="card-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=600" alt="Honda PCX" loading="lazy">
+                            </div>
+                            <div class="card-body">
+                                <h3>Honda PCX</h3>
+                                <ul class="specs-list">
+                                    <li><i class="bi bi-calendar-event"></i> 2023</li>
+                                    <li><i class="bi bi-gear"></i> Matic</li>
+                                    <li><i class="bi bi-fuel-pump"></i> Injeksi</li>
+                                </ul>
+                                <div class="card-price">
+                                    <span class="price">Rp200.000</span>
+                                    <small>/ Hari</small>
+                                </div>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20sewa%20Honda%20PCX" class="btn btn-primary btn-block" target="_blank" rel="noopener">
+                                    Booking Sekarang
+                                </a>
+                            </div>
+                        </div>
 
-            await sendDataToScript(
-                payload, 
-                "btnSubmitOrder", 
-                "alertOrder", 
-                "Terima kasih! Pemesanan Anda telah terdaftar. Tim kami akan segera menghubungi via WhatsApp."
-            );
-            
-            this.reset();
-            calculateTotal();
-        });
+                        <!-- Motor Card 5 -->
+                        <div class="card product-card" data-aos="fade-up" data-aos-delay="100">
+                            <div class="card-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=600" alt="Yamaha Aerox" loading="lazy">
+                            </div>
+                            <div class="card-body">
+                                <h3>Yamaha Aerox</h3>
+                                <ul class="specs-list">
+                                    <li><i class="bi bi-calendar-event"></i> 2023</li>
+                                    <li><i class="bi bi-gear"></i> Matic</li>
+                                    <li><i class="bi bi-fuel-pump"></i> Injeksi</li>
+                                </ul>
+                                <div class="card-price">
+                                    <span class="price">Rp170.000</span>
+                                    <small>/ Hari</small>
+                                </div>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20sewa%20Yamaha%20Aerox" class="btn btn-primary btn-block" target="_blank" rel="noopener">
+                                    Booking Sekarang
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        // Form Kontak
-        document.getElementById("contactForm").addEventListener("submit", async function(e) {
-            e.preventDefault();
+                <!-- Content Mobil -->
+                <div class="tab-content" id="tab-mobil">
+                    <div class="grid grid-3">
+                        <!-- Mobil Card 1 -->
+                        <div class="card product-card">
+                            <div class="card-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=600" alt="Toyota Agya" loading="lazy">
+                            </div>
+                            <div class="card-body">
+                                <h3>Toyota Agya</h3>
+                                <ul class="specs-list">
+                                    <li><i class="bi bi-people"></i> 5 Seats</li>
+                                    <li><i class="bi bi-gear"></i> Automatic</li>
+                                    <li><i class="bi bi-calendar-event"></i> 2022</li>
+                                </ul>
+                                <div class="card-price">
+                                    <span class="price">Rp300.000</span>
+                                    <small>/ Hari</small>
+                                </div>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20sewa%20Toyota%20Agya" class="btn btn-primary btn-block" target="_blank" rel="noopener">
+                                    Booking Sekarang
+                                </a>
+                            </div>
+                        </div>
 
-            const payload = {
-                formType: "kontak",
-                nama: document.getElementById("contactNama").value,
-                kontak: document.getElementById("contactInfo").value,
-                subjek: document.getElementById("contactSubjek").value,
-                pesan: document.getElementById("contactPesan").value
-            };
+                        <!-- Mobil Card 2 -->
+                        <div class="card product-card">
+                            <div class="card-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&q=80&w=600" alt="Honda Brio" loading="lazy">
+                                <span class="badge badge-accent">Best Seller</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Honda Brio</h3>
+                                <ul class="specs-list">
+                                    <li><i class="bi bi-people"></i> 5 Seats</li>
+                                    <li><i class="bi bi-gear"></i> Automatic</li>
+                                    <li><i class="bi bi-calendar-event"></i> 2023</li>
+                                </ul>
+                                <div class="card-price">
+                                    <span class="price">Rp350.000</span>
+                                    <small>/ Hari</small>
+                                </div>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20sewa%20Honda%20Brio" class="btn btn-primary btn-block" target="_blank" rel="noopener">
+                                    Booking Sekarang
+                                </a>
+                            </div>
+                        </div>
 
-            await sendDataToScript(
-                payload, 
-                "btnSubmitContact", 
-                "alertContact", 
-                "Pesan Anda telah berhasil dikirim. Kami akan membalas secepatnya!"
-            );
+                        <!-- Mobil Card 3 -->
+                        <div class="card product-card">
+                            <div class="card-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=600" alt="Toyota Avanza" loading="lazy">
+                            </div>
+                            <div class="card-body">
+                                <h3>Toyota Avanza</h3>
+                                <ul class="specs-list">
+                                    <li><i class="bi bi-people"></i> 7 Seats</li>
+                                    <li><i class="bi bi-gear"></i> Automatic</li>
+                                    <li><i class="bi bi-calendar-event"></i> 2023</li>
+                                </ul>
+                                <div class="card-price">
+                                    <span class="price">Rp450.000</span>
+                                    <small>/ Hari</small>
+                                </div>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20sewa%20Toyota%20Avanza" class="btn btn-primary btn-block" target="_blank" rel="noopener">
+                                    Booking Sekarang
+                                </a>
+                            </div>
+                        </div>
 
-            this.reset();
-        });
+                        <!-- Mobil Card 4 -->
+                        <div class="card product-card">
+                            <div class="card-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1541348263662-e082662dc324?auto=format&fit=crop&q=80&w=600" alt="Toyota Innova Reborn" loading="lazy">
+                            </div>
+                            <div class="card-body">
+                                <h3>Toyota Innova</h3>
+                                <ul class="specs-list">
+                                    <li><i class="bi bi-people"></i> 7 Seats</li>
+                                    <li><i class="bi bi-gear"></i> Automatic</li>
+                                    <li><i class="bi bi-calendar-event"></i> 2022</li>
+                                </ul>
+                                <div class="card-price">
+                                    <span class="price">Rp650.000</span>
+                                    <small>/ Hari</small>
+                                </div>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20sewa%20Toyota%20Innova" class="btn btn-primary btn-block" target="_blank" rel="noopener">
+                                    Booking Sekarang
+                                </a>
+                            </div>
+                        </div>
 
-        // Fungsi Generik untuk Pengiriman Data Menggunakan fetch()
-        async function sendDataToScript(payload, btnId, alertId, successMessage) {
-            const btn = document.getElementById(btnId);
-            const alertBox = document.getElementById(alertId);
-            const originalBtnText = btn.innerText;
+                        <!-- Mobil Card 5 -->
+                        <div class="card product-card">
+                            <div class="card-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600" alt="Mitsubishi Xpander" loading="lazy">
+                            </div>
+                            <div class="card-body">
+                                <h3>Mitsubishi Xpander</h3>
+                                <ul class="specs-list">
+                                    <li><i class="bi bi-people"></i> 7 Seats</li>
+                                    <li><i class="bi bi-gear"></i> Automatic</li>
+                                    <li><i class="bi bi-calendar-event"></i> 2023</li>
+                                </ul>
+                                <div class="card-price">
+                                    <span class="price">Rp500.000</span>
+                                    <small>/ Hari</small>
+                                </div>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20sewa%20Mitsubishi%20Xpander" class="btn btn-primary btn-block" target="_blank" rel="noopener">
+                                    Booking Sekarang
+                                </a>
+                            </div>
+                        </div>
 
-            btn.disabled = true;
-            btn.innerText = "Memproses & Mengirim...";
-            alertBox.style.display = "none";
+                        <!-- Mobil Card 6 -->
+                        <div class="card product-card">
+                            <div class="card-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=600" alt="Toyota Hiace" loading="lazy">
+                            </div>
+                            <div class="card-body">
+                                <h3>Toyota Hiace</h3>
+                                <ul class="specs-list">
+                                    <li><i class="bi bi-people"></i> 15 Seats</li>
+                                    <li><i class="bi bi-gear"></i> Manual</li>
+                                    <li><i class="bi bi-calendar-event"></i> 2022</li>
+                                </ul>
+                                <div class="card-price">
+                                    <span class="price">Rp1.200.000</span>
+                                    <small>/ Hari</small>
+                                </div>
+                                <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20sewa%20Toyota%20Hiace" class="btn btn-primary btn-block" target="_blank" rel="noopener">
+                                    Booking Sekarang
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            try {
-                // Trik penting: Content-Type 'text/plain;charset=utf-8' digunakan 
-                // untuk menghindari CORS preflight error dari browser ke Google Apps Script
-                const response = await fetch(APPS_SCRIPT_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify(payload)
-                });
+        <!-- 6. Cara Booking -->
+        <section class="section bg-light" id="cara-booking">
+            <div class="container">
+                <div class="section-header text-center" data-aos="fade-up">
+                    <span class="section-subtitle">Langkah Mudah</span>
+                    <h2 class="section-title">Cara Booking Kendaraan</h2>
+                    <p class="section-description">Proses sederhana hanya dalam 5 langkah praktis.</p>
+                </div>
 
-                const result = await response.json();
+                <div class="timeline" data-aos="fade-up">
+                    <div class="step-item">
+                        <div class="step-icon"><i class="bi bi-card-checklist"></i></div>
+                        <h4>1. Pilih Kendaraan</h4>
+                        <p>Tentukan motor/mobil sesuai kebutuhan perjalanan Anda.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon"><i class="bi bi-whatsapp"></i></div>
+                        <h4>2. Hubungi WA</h4>
+                        <p>Klik tombol booking untuk terhubung dengan Admin kami.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon"><i class="bi bi-file-earmark-person"></i></div>
+                        <h4>3. Konfirmasi</h4>
+                        <p>Kirimkan identitas (KTP/SIM) & jadwalkan tanggal sewa.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon"><i class="bi bi-wallet2"></i></div>
+                        <h4>4. Pembayaran</h4>
+                        <p>Lakukan pembayaran DP atau pelunasan via Transfer.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon"><i class="bi bi-key"></i></div>
+                        <h4>5. Unit Diantar</h4>
+                        <p>Tim kami mengantarkan kendaraan langsung ke lokasi Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                if (result.status === "success") {
-                    alertBox.className = "alert alert-success";
-                    alertBox.innerText = successMessage;
-                } else {
-                    throw new Error(result.message || "Gagal menyimpan data.");
-                }
+        <!-- 7. Promo -->
+        <section class="section promo-section" id="promo">
+            <div class="container">
+                <div class="promo-banner glassmorphism" data-aos="zoom-in">
+                    <div class="promo-content">
+                        <span class="badge badge-accent">Penawaran Spesial</span>
+                        <h2>Hemat Lebih Banyak Dengan Promo Durasi Sewa!</h2>
+                        <p>Dapatkan potongan harga khusus untuk pemesanan jangka panjang.</p>
+                        <div class="promo-cards">
+                            <div class="promo-card">
+                                <h3>Diskon 20%</h3>
+                                <p>Sewa Mingguan (Minimal 7 Hari)</p>
+                            </div>
+                            <div class="promo-card">
+                                <h3>Diskon 30%</h3>
+                                <p>Sewa Bulanan (Minimal 30 Hari)</p>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20klaim%20Promo%20Sewa" target="_blank" rel="noopener" class="btn btn-accent btn-lg">
+                            Klaim Promo Sekarang
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            } catch (error) {
-                console.error("Fetch Error:", error);
-                alertBox.className = "alert alert-error";
-                alertBox.innerText = "Terjadi kesalahan saat mengunggah data. Pastikan URL Apps Script sudah sesuai.";
-            } finally {
-                btn.disabled = false;
-                btn.innerText = originalBtnText;
-                alertBox.style.display = "block";
-            }
-        }
-    </script>
+        <!-- 8. Testimoni Slider -->
+        <section class="section" id="testimoni">
+            <div class="container">
+                <div class="section-header text-center" data-aos="fade-up">
+                    <span class="section-subtitle">Ulasan Pelanggan</span>
+                    <h2 class="section-title">Apa Kata Mereka?</h2>
+                </div>
+
+                <div class="slider-container" data-aos="fade-up">
+                    <div class="testimonial-slider" id="testimonial-slider">
+                        <!-- Testi 1 -->
+                        <div class="testimonial-card glassmorphism">
+                            <div class="stars">★★★★★</div>
+                            <p>"Motor sangat bersih, wangi, dan mesinnya halus banget. Proses antar jemput di bandara tepat waktu!"</p>
+                            <div class="user-info">
+                                <strong>Rian Permana</strong>
+                                <small>Wisatawan - Jakarta</small>
+                            </div>
+                        </div>
+                        <!-- Testi 2 -->
+                        <div class="testimonial-card glassmorphism">
+                            <div class="stars">★★★★★</div>
+                            <p>"Sewa Innova Reborn untuk perjalanan keluarga. Unit super nyaman dan bersih. Pelayanan sangat memuaskan."</p>
+                            <div class="user-info">
+                                <strong>Siti Aminah</strong>
+                                <small>Keluarga - Surabaya</small>
+                            </div>
+                        </div>
+                        <!-- Testi 3 -->
+                        <div class="testimonial-card glassmorphism">
+                            <div class="stars">★★★★★</div>
+                            <p>"Harga sangat bersaing dan respon admin via WA cepat sekali. Bebas ribet, recommended banget!"</p>
+                            <div class="user-info">
+                                <strong>Budi Santoso</strong>
+                                <small>Business Traveler</small>
+                            </div>
+                        </div>
+                        <!-- Testi 4 -->
+                        <div class="testimonial-card glassmorphism">
+                            <div class="stars">★★★★★</div>
+                            <p>"Scoopy-nya kinclong, helm bersih dapat 2 pcs plus jas hujan. Mantap luar biasa!"</p>
+                            <div class="user-info">
+                                <strong>Dina Rosiana</strong>
+                                <small>Solo Traveler</small>
+                            </div>
+                        </div>
+                        <!-- Testi 5 -->
+                        <div class="testimonial-card glassmorphism">
+                            <div class="stars">★★★★★</div>
+                            <p>"Sewa bulanan untuk operasional kantor. Diberikan promo potongan harga yang sangat kompetitif."</p>
+                            <div class="user-info">
+                                <strong>Eko Prasetyo</strong>
+                                <small>Corporate Client</small>
+                            </div>
+                        </div>
+                        <!-- Testi 6 -->
+                        <div class="testimonial-card glassmorphism">
+                            <div class="stars">★★★★★</div>
+                            <p>"Layanan 24 jam terbukti nyata! Ban sempat bocor malam hari dan tim respon langsung datang membantu."</p>
+                            <div class="user-info">
+                                <strong>Andi Wijaya</strong>
+                                <small>Wisatawan</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slider-controls">
+                        <button id="slide-prev" aria-label="Previous Testimonial"><i class="bi bi-chevron-left"></i></button>
+                        <button id="slide-next" aria-label="Next Testimonial"><i class="bi bi-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. FAQ -->
+        <section class="section bg-light" id="faq">
+            <div class="container">
+                <div class="section-header text-center" data-aos="fade-up">
+                    <span class="section-subtitle">Pertanyaan Umum</span>
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                </div>
+
+                <div class="faq-accordion" data-aos="fade-up">
+                    <div class="faq-item">
+                        <button class="faq-question">Apa saja syarat utama untuk menyewa kendaraan? <i class="bi bi-chevron-down"></i></button>
+                        <div class="faq-answer">
+                            <p>Syarat utama meliputi e-KTP (asli), SIM A (untuk mobil) atau SIM C (untuk motor), serta bukti pemesanan tiket pesawat/kereta atau booking hotel tempat menginap.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">Apakah ada fasilitas antar jemput unit? <i class="bi bi-chevron-down"></i></button>
+                        <div class="faq-answer">
+                            <p>Ya, kami menyediakan layanan antar jemput gratis di area area utama kota, Stasiun, dan Bandara Internasional.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">Bagaimana ketentuan pembayaran sewa? <i class="bi bi-chevron-down"></i></button>
+                        <div class="faq-answer">
+                            <p>Pemesanan dapat diikat dengan Down Payment (DP) minimal 20%, dan sisanya dilunasi saat serah terima unit kendaraan.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">Apakah fasilitas sewa motor sudah termasuk helm dan jas hujan? <i class="bi bi-chevron-down"></i></button>
+                        <div class="faq-answer">
+                            <p>Tentu saja! Setiap pemesanan motor sudah dilengkapi dengan 2 helm SNI bersih dan 2 jas hujan gratis.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">Apakah rental mobil sudah termasuk bensin & driver? <i class="bi bi-chevron-down"></i></button>
+                        <div class="faq-answer">
+                            <p>Harga tertera pada paket standar adalah sewa Lepas Kunci. Namun kami juga menyediakan opsi paket dengan Driver + BBM sesuai permintaan.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">Bagaimana jika terjadi kendala/kerusakan pada kendaraan? <i class="bi bi-chevron-down"></i></button>
+                        <div class="faq-answer">
+                            <p>Segera hubungi tim Customer Support 24 jam kami. Kami akan mengirimkan tim mekanik atau penggantian unit secepatnya.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">Apakah bisa memperpanjang durasi sewa? <i class="bi bi-chevron-down"></i></button>
+                        <div class="faq-answer">
+                            <p>Bisa. Harap konfirmasi perpanjangan sewa kepada admin minimal 6 jam sebelum masa sewa berakhir.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">Bagaimana kebijakan pembatalan (cancellation policy)? <i class="bi bi-chevron-down"></i></button>
+                        <div class="faq-answer">
+                            <p>Pembatalan H-2 sebelum tanggal sewa dapat dilakukan refund DP 100%. Pembatalan kurang dari H-1 DP dianggap hangus.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Galeri -->
+        <section class="section" id="galeri">
+            <div class="container">
+                <div class="section-header text-center" data-aos="fade-up">
+                    <span class="section-subtitle">Dokumentasi</span>
+                    <h2 class="section-title">Galeri Armada Kami</h2>
+                </div>
+
+                <div class="gallery-filters text-center" data-aos="fade-up">
+                    <button class="filter-btn active" data-filter="all">Semua</button>
+                    <button class="filter-btn" data-filter="motor">Motor</button>
+                    <button class="filter-btn" data-filter="mobil">Mobil</button>
+                </div>
+
+                <div class="gallery-grid" data-aos="fade-up">
+                    <div class="gallery-item" data-category="motor">
+                        <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600" alt="Motor 1" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                    <div class="gallery-item" data-category="mobil">
+                        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=600" alt="Mobil 1" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                    <div class="gallery-item" data-category="motor">
+                        <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=600" alt="Motor 2" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                    <div class="gallery-item" data-category="mobil">
+                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=600" alt="Mobil 2" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                    <div class="gallery-item" data-category="motor">
+                        <img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&q=80&w=600" alt="Motor 3" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                    <div class="gallery-item" data-category="mobil">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600" alt="Mobil 3" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox Modal for Gallery -->
+        <div id="lightbox" class="lightbox">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-content" id="lightbox-img" alt="Gallery Lightbox View">
+        </div>
+
+        <!-- 11. Lokasi & Form Kontak -->
+        <section class="section bg-light" id="lokasi">
+            <div class="container">
+                <div class="grid grid-2">
+                    <!-- Map & Detail Info -->
+                    <div data-aos="fade-right">
+                        <span class="section-subtitle">Temukan Kami</span>
+                        <h2 class="section-title">Lokasi & Kontak</h2>
+                        <ul class="contact-info-list">
+                            <li>
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <div>
+                                    <strong>Alamat Garasi Pusat:</strong>
+                                    <p>Jl. Utama Raya No. 88, Pusat Kota, Indonesia</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-clock-fill"></i>
+                                <div>
+                                    <strong>Jam Operasional:</strong>
+                                    <p>Senin - Minggu: 06:00 - 22:00 WIB (Support WA 24 Jam)</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-telephone-fill"></i>
+                                <div>
+                                    <strong>Telepon & WhatsApp:</strong>
+                                    <p>+62 812-3456-7890</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- Google Maps Embed -->
+                        <div class="map-wrapper">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.3854124921477!2d115.21262931478396!3d-8.654487993781702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMzknMTYuMiJTIDExNcKwMTInNTMuNCJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid" 
+                                width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                    <!-- Quick Booking Form -->
+                    <div class="contact-form-card glassmorphism" data-aos="fade-left">
+                        <h3>Kirim Pesan & Pemesanan Cepat</h3>
+                        <form id="booking-form">
+                            <div class="form-group">
+                                <label for="name">Nama Lengkap</label>
+                                <input type="text" id="name" class="form-control" placeholder="Masukkan nama Anda" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Nomor WhatsApp</label>
+                                <input type="tel" id="phone" class="form-control" placeholder="08123456789" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicle">Pilihan Kendaraan</label>
+                                <select id="vehicle" class="form-control" required>
+                                    <option value="">-- Pilih Kendaraan --</option>
+                                    <optgroup label="Sepeda Motor">
+                                        <option value="Honda Scoopy">Honda Scoopy</option>
+                                        <option value="Honda Vario 160">Honda Vario 160</option>
+                                        <option value="Yamaha NMAX">Yamaha NMAX</option>
+                                        <option value="Honda PCX">Honda PCX</option>
+                                        <option value="Yamaha Aerox">Yamaha Aerox</option>
+                                    </optgroup>
+                                    <optgroup label="Mobil">
+                                        <option value="Toyota Agya">Toyota Agya</option>
+                                        <option value="Honda Brio">Honda Brio</option>
+                                        <option value="Toyota Avanza">Toyota Avanza</option>
+                                        <option value="Toyota Innova">Toyota Innova</option>
+                                        <option value="Mitsubishi Xpander">Mitsubishi Xpander</option>
+                                        <option value="Toyota Hiace">Toyota Hiace</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Tanggal Sewa</label>
+                                <input type="date" id="date" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Kirim via WhatsApp</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Call to Action (CTA) -->
+        <section class="cta-section">
+            <div class="container text-center" data-aos="zoom-in">
+                <h2>Siap Berangkat Hari Ini?</h2>
+                <p>Booking kendaraan pilihanmu sekarang dan nikmati perjalanan terbaik bersama ProRental.</p>
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20siap%20booking%20sekarang" target="_blank" rel="noopener" class="btn btn-accent btn-lg">
+                    <i class="bi bi-whatsapp"></i> Hubungi Kami Sekarang
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 13. Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="#home" class="brand-logo text-white">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Pro<strong>Rental</strong></span>
+                </a>
+                <p>Penyedia jasa rental motor dan mobil terdepan dengan armada berkualitas, terawat, dan harga paling terjangkau.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Navigasi</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#keunggulan">Keunggulan</a></li>
+                    <li><a href="#armada">Daftar Armada</a></li>
+                    <li><a href="#cara-booking">Cara Booking</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Kontak</h4>
+                <p><i class="bi bi-telephone"></i> +62 812-3456-7890</p>
+                <p><i class="bi bi-envelope"></i> info@prorental.com</p>
+                <p><i class="bi bi-geo-alt"></i> Pusat Kota, Indonesia</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Ikuti Kami</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 ProRental Indonesia. All Rights Reserved. Designed with Clean Code.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/6281234567890" class="floating-wa" target="_blank" rel="noopener" aria-label="Contact WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to Top">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
 </body>
 </html>
